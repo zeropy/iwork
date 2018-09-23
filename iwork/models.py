@@ -12,7 +12,7 @@ class workRecordManager(models.Manager):
         '''
         try:
             workRecord.objects.create(
-                theme=data.get('data'),
+                theme=data.get('theme'),
                 content=data.get('content'),
                 operator=data.get('username')
             )

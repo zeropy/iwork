@@ -176,7 +176,7 @@
             var theme = $('#theme').val();
             var content = $('#content').val();
             console.log('11')
-            $.post('{SITE_URL}/iwork/save_record', {'theme': theme, 'content': content}, function(data) {
+            $.post('${SITE_URL}iwork/save_record', {'theme': theme, 'content': content}, function(data) {
               if(data.result) {
                 alert('记录成功')
               } else {
