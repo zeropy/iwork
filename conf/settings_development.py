@@ -12,7 +12,6 @@ See the License for the specific language governing permissions and limitations 
 """
 from settings import APP_ID
 
-
 # ===============================================================================
 # 数据库设置, 本地开发数据库设置
 # ===============================================================================

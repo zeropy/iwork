@@ -75,12 +75,12 @@
                             <div class="king-block-content">
                                 <form class="form-horizontal">
                                     <div class="form-group clearfix ">
-                                        <label class="col-sm-3 control-label bk-lh30 pt0">会议主题：</label>
+                                        <label class="col-sm-3 control-label bk-lh30 pt0">主题：</label>
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control bk-valign-top" id="theme" placeholder="提示信息"> </div>
                                     </div>
                                     <div class="form-group clearfix ">
-                                        <label class="col-sm-3 control-label bk-lh30 pt0">会议内容：</label>
+                                        <label class="col-sm-3 control-label bk-lh30 pt0">内容：</label>
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control bk-valign-top" id="content" placeholder="提示信息"> </div>
                                     </div>
@@ -104,63 +104,28 @@
                             </div>
                             <div class="king-block-content">
                                 <table class="table mb0 pr15 ranger-box ">
-                                    <thead>
-                                        <tr>
-                                            <th style="width: 100px;">#</th>
-                                            <th style="width: 20%;">任务</th>
-                                            <th style="width: 20%;">进度</th>
-                                            <th style="width: 20%;">开发者</th>
-                                            <th>结束时间</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td style="width: 100px;">1</td>
-                                            <td style="width: 20%;">版本更新</td>
-                                            <td style="width: 20%;">完成</td>
-                                            <td style="width: 20%;">管理员</td>
-                                            <td>2015-09-20</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 100px;">2</td>
-                                            <td style="width: 20%;">数据备份</td>
-                                            <td style="width: 20%;">完成</td>
-                                            <td style="width: 20%;">管理员</td>
-                                            <td>2015-09-20</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 100px;">3</td>
-                                            <td style="width: 20%;">定时任务</td>
-                                            <td style="width: 20%;">完成</td>
-                                            <td style="width: 20%;">管理员</td>
-                                            <td>2015-09-20</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 100px;">4</td>
-                                            <td style="width: 20%;">修复bug</td>
-                                            <td style="width: 20%;">完成</td>
-                                            <td style="width: 20%;">管理员</td>
-                                            <td>2015-09-20</td>
-                                        </tr>
-                                    </tbody>
+                                  <tbody>
+
+                                  </tbody>
                                 </table>
                                 <!-- 设置面板Start -->
                                 <template id="header_tpl_1537684560044">
                                     <tr>
                                         <th style="width: 100px;">#index#</th>
-                                        <th style="width: 20%;">#task#</th>
-                                        <th style="width: 20%;">#progress#</th>
-                                        <th style="width: 20%;">#host#</th>
-                                        <th>#date#</th>
+                                        <th style="width: 20%;">#theme#</th>
+                                        <th style="width: 20%;">#content#</th>
                                     </tr>
                                 </template>
-                                <template id="tpl_1537684560044">
+                                <template id="render_tpl_nodata">
+                                  <tr>
+                                      <td colspan="3"> 没有数据 </td>
+                                  </tr>
+                                </template>
+                                <template id="render_tpl_data">
                                     <tr>
                                         <td style="width: 100px;">#index#</td>
-                                        <td style="width: 20%;">#columnName1#</td>
-                                        <td style="width: 20%;">#columnName2#</td>
-                                        <td style="width: 20%;">#columnName3#</td>
-                                        <td>#columnName4#</td>
+                                        <td style="width: 40%;">#theme#</td>
+                                        <td style="width: 40%;">#content#</td>
                                     </tr>
                                 </template>
                                 <!-- 设置面板End -->
@@ -172,50 +137,72 @@
         </div>
     </div>
     <script>
-        function save_record(obj) {
-            var theme = $('#theme').val();
-            var content = $('#content').val();
-            console.log('11')
-            $.post('${SITE_URL}iwork/save_record', {'theme': theme, 'content': content}, function(data) {
-              if(data.result) {
-                alert('记录成功')
-              } else {
-                alert(data.message)
-              }
-            }, 'json')
-            return
-        }
-        $(function(){
-                function renderTpl(str, cfg) {
-                    var re = /(#(.+?)#)/g;
+        function renderTpl(str, cfg) {
+            var re = /(#(.+?)#)/g;
 
-                    return str.replace(re, function() {
-                        var val = cfg[arguments[2]]+'';
-                        if(typeof val == 'undefined') {
-                            val = '';
-                        }
-                        return val;
-                    });
+            return str.replace(re, function() {
+                var val = cfg[arguments[2]]+'';
+                if(typeof val == 'undefined') {
+                    val = '';
                 }
+                return val;
+            });
+        };
 
+        function initRanger(conf){
                 // 异步请求后台数据
                 $.ajax({
-                    url: 'https://magicbox.bk.tencent.com/static_api/v3/components/table6/data.json',
+                    url: conf.url,
                     type: 'GET',
+                    dataType: conf.dataType,
                     success: function(res){
+                      if (res.code == 0) {
                         var _html = ' ';
-                        var list = res.items;
-                        var tpl = $('#tpl_1537684560044').html();
-                        var headerTpl =  $('#header_tpl_1537684560044').html();
-                        for (var i=0,len=list.length; i < len; i++){
-                            var item = list[i];
-                            _html += renderTpl(tpl, item)
-                        }
-                        $('#code_1537684560044 tbody').html(_html);
-                        $('.ranger-box thead').html(renderTpl(headerTpl,res.catalogues));
+                        var list = res.data;
+                        var tpl = $('#render_tpl_data').html();
+                        if (list.length == 0) {
+                          _html = $('#render_tpl_nodata').html()
+                        } else {
+                          for (var i=0,len=list.length; i < len; i++){
+                              var item = list[i];
+                              _html += renderTpl(tpl, item)
+                          }
+                        };
+                        $('tbody').html(_html);
+                      } else {
+                        var _html = '';
+                        var tpl = $('#render_tpl_nodata').html();
+                        $('tbody').html(_html);
+                      }
                     }
                 });
-            });
+            };
+
+            function save_record(obj) {
+                var theme = $('#theme').val();
+                var content = $('#content').val();
+                $.post('${SITE_URL}iwork/save_record', {'theme': theme, 'content': content}, function(data) {
+                  if(data.result) {
+                    initRanger({
+                            url: '${SITE_URL}iwork/records/',
+                            dataType: 'json',
+                            container: '.ranger-box tbody'
+                        });
+                  } else {
+                    alert(data.message)
+                  }
+                }, 'json')
+                return
+            };
+
+    </script>
+    <script>
+    //获取会议记录
+    initRanger({
+            url: '${SITE_URL}iwork/records/',
+            dataType: 'json',
+            container: '.ranger-box tbody'
+        });
     </script>
 </body>
 

@@ -34,4 +34,12 @@ def save_record(request):
 
 @login_exempt
 def record(request):
-    pass
+    record_list = workRecord.objects.all().order_by('-id')
+    data = []
+    for index, record in enumerate(record_list):
+        data.append({
+            'index': index,
+            'theme': record.theme,
+            'content': record.content,
+        })
+    return render_json({'code': 0, 'message': 'success', 'data': data})
