@@ -8,7 +8,6 @@ from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 
 
-@login_exempt
 def home(request):
     '''
     Home
@@ -17,7 +16,6 @@ def home(request):
 
 
 @csrf_exempt
-@login_exempt
 def save_record(request):
     theme = request.POST.get('theme', '')
     content = request.POST.get('content', '')
@@ -32,7 +30,6 @@ def save_record(request):
     return render_json(result)
 
 
-@login_exempt
 def record(request):
     record_list = workRecord.objects.all().order_by('-id')
     data = []
