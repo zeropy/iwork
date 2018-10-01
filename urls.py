@@ -27,6 +27,7 @@ urlpatterns = patterns(
     # 在home_application(根应用)里开始开发你的应用的主要功能
     url(r'^', include('home_application.urls')),
     url(r'^iwork/', include('iwork.urls')),
+    url(r'^get_capacity/', include('get_capacity.urls')),
 )
 
 
