@@ -250,6 +250,8 @@
                 if(typeof val == 'undefined') {
                     val = '';
                 }
+                console.log('val');
+                console.log(val);
                 return val;
             });
         };
@@ -319,7 +321,8 @@
                 var item = list[i];
                 console.log('item');
                 console.log(item);
-                _html += renderTpl(tpl, item)
+                _html += renderTpl(tpl, item);
+                console.log(_html);
               }
               $('#app_id').html(_html);
               console.log(_html);
