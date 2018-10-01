@@ -259,7 +259,7 @@
         function select_ip(app_id) {
           // 级联选择IP
           $('#ip').html('');
-          $.get('${SITE_URL}get_capacity/get_ip_by_appid', {'app_id': app_id}, function(data){
+          $.get('${SITE_URL}get_capacity/get_ip_by_appid/', {'app_id': app_id}, function(data){
             if (data.result) {
               var _html = '';
               var list = data.data;
