@@ -314,8 +314,11 @@
               var list = data.data;
               console.log(list);
               var tpl = $('#app_tpl').val();
+              console.log(tpl);
               for (i=0, len=list.length; i < len; i++) {
                 var item = list[i];
+                console.log('item');
+                console.log(item);
                 _html += renderTpl(tpl, item)
               }
               $('#app_id').html(_html);
