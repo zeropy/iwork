@@ -242,6 +242,20 @@
             });
     </script>
     <script>
+    function renderTpl(str, cfg) {
+        var re = /(#(.+?)#)/g;
+
+        return str.replace(re, function() {
+            var val = cfg[arguments[2]]+'';
+            if(typeof val == 'undefined') {
+                val = '';
+            }
+            console.log('val');
+            console.log(val);
+            return val;
+        });
+    };
+
         function select_ip(app_id) {
           // 级联选择IP
           $('#ip').html('');
@@ -296,26 +310,13 @@
         };
 
         $(function(){
-          function renderTpl(str, cfg) {
-              var re = /(#(.+?)#)/g;
-
-              return str.replace(re, function() {
-                  var val = cfg[arguments[2]]+'';
-                  if(typeof val == 'undefined') {
-                      val = '';
-                  }
-                  console.log('val');
-                  console.log(val);
-                  return val;
-              });
-          };
-          
           $.get('${SITE_URL}get_capacity/get_app/', function(data) {
             if (data.result) {
               var _html = '';
               var list = data.data;
               console.log(list);
               var tpl = $('#app_tpl').val();
+              alert(tpl);
               console.log(tpl);
               for (i=0, len=list.length; i < len; i++) {
                 var item = list[i];
