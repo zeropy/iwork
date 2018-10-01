@@ -242,6 +242,18 @@
             });
     </script>
     <script>
+        function renderTpl(str, cfg) {
+            var re = /(#(.+?)#)/g;
+
+            return str.replace(re, function() {
+                var val = cfg[arguments[2]]+'';
+                if(typeof val == 'undefined') {
+                    val = '';
+                }
+                return val;
+            });
+        }
+
         function select_ip(app_id) {
           // 级联选择IP
           $('#ip').html('');
