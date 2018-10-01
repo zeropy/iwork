@@ -8,12 +8,12 @@ from blueking.component.shortcuts import get_client_by_request
 # Create your views here.
 
 
-@login_exempt
+# @login_exempt
 def home(request):
     return render_mako_context(request, 'get_capacity/home.html')
 
 
-@login_exempt
+# @login_exempt
 def get_app(request):
     '''
     获取所有业务
@@ -34,8 +34,8 @@ def get_app(request):
     return render_json(result)
 
 
-@login_exempt
-def get_id_by_appid(request):
+# @login_exempt
+def get_ip_by_appid(request):
     '''
     获取业务下IP
     '''
