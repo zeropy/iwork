@@ -252,7 +252,7 @@
                 }
                 return val;
             });
-        }
+        };
 
         function select_ip(app_id) {
           // 级联选择IP
@@ -271,7 +271,7 @@
               alert("获取失败")
             }
           }, 'json')
-        }
+        };
 
         function select_task(app_id) {
           // 级联选择task
@@ -290,7 +290,7 @@
               alert('获取失败')
             }
           }, 'json')
-        }
+        };
 
         function search(obj) {
           var app_id = $('#app_id').val();
@@ -305,7 +305,7 @@
               alert('获取失败')
             }
           }, 'json')
-        }
+        };
 
         $(function(){
           $.get('${SITE_URL}get_capacity/get_app/', function(data) {
@@ -324,7 +324,7 @@
             } else {
               alert('获取失败')
             }
-          }, 'json')
+          }, 'json');
 
           $('#app_id').change(function(data){
             var app_id = $('#app_id').val();
