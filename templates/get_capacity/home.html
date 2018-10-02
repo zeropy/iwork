@@ -324,7 +324,7 @@
             if (list.length) {
               var tpl = $('#tpl_1538054587221').html();
               var headertpl = $('#hreadertpl_1111').html();
-              for (i=0,len=list.length; i < len; i++) {
+              for ( var i=0,len=list.length; i < len; i++) {
                 var item = list[i];
                 _html += renderTpl(tpl, item);
               }
