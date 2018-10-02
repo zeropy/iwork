@@ -349,6 +349,8 @@
         function createEStandLineChart(conf){
             var myChart = echarts.init(document.getElementById(conf.selector));
             var legendData = []
+            console.log('series')
+            console.log(conf.data.series)
             for(var i=0; i < conf.data.series.length;i++){
                 legendData.push(conf.data.series[i].name)
             }
