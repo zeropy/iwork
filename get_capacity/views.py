@@ -96,14 +96,14 @@ def execute_task(request):
     }
     resp = client.job.get_task_detail(**kwargs)
 
-    step_args = []
+    steps_args = []
     if resp.get('result'):
         data = resp.get('data', {})
         steps = data.get('nmStepBeanList', [])
         # 组装步骤参数
         for _step in steps:
             step_args.append({
-                'stepID': _step.get('stepID'),
+                'stepId': _step.get('stepId'),
                 'ipList': '1:%s' % ip,
                 'scriptParam': script_param,
             })
@@ -112,7 +112,7 @@ def execute_task(request):
     kwargs = {
         'app_id': app_id,
         'task_id': taskid,
-        'steps': step_args,
+        'steps': steps_args,
     }
     print(kwargs)
     resp = client.job.execute_task(**kwargs)
@@ -124,7 +124,7 @@ def execute_task(request):
     return render_json(result)
 
 
-def _get_capacity(request):
+def get_capacity(request):
     '''
     获取作业指向结果,并解析结果展示
     '''
