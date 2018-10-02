@@ -9,22 +9,23 @@ class CapacityDataManager(models.Manager):
     '''
     保存执行结果的数据
     '''
-    try:
-        CapacityData.object.create(
-            ip=data[6],
-            filesystem=data[0],
-            size=data[1],
-            used=data[2],
-            avail=data[3],
-            use=data[4],
-            mounted=data[5],
-            create=datetime.now()
-        )
-        result = {'result': True, 'message': u'保存成功'}
-    except Exception, e:
-        logger.error(u"save_data %s" % e)
-        result = {'result': False, 'message': '保存失败, %s' % e}
-    return result
+    def save_data(self, data):
+        try:
+            CapacityData.object.create(
+                ip=data[6],
+                filesystem=data[0],
+                size=data[1],
+                used=data[2],
+                avail=data[3],
+                use=data[4],
+                mounted=data[5],
+                create=datetime.now()
+            )
+            result = {'result': True, 'message': u'保存成功'}
+        except Exception, e:
+            logger.error(u"save_data %s" % e)
+            result = {'result': False, 'message': '保存失败, %s' % e}
+        return result
 
 
 class CapacityData(models.Model):
