@@ -133,7 +133,7 @@
                                 </template>
                                 <template id="tpl_1538054587221">
                                     <tr>
-                                        <td style="width: 100px;">#index#</td>
+                                        <!-- <td style="width: 100px;">#index#</td> -->
                                         <td style="width: 20%;">#FileSystem#</td>
                                         <td style="width: 20%;">#Size#</td>
                                         <td style="width: 20%;">#Used#</td>
@@ -323,12 +323,12 @@
             console.log(list);
             if (list.length) {
               var tpl = $('#tpl_1538054587221').html();
-              var headertpl = $('#header_tpl_1538054587221').html();
+              // var headertpl = $('#header_tpl_1538054587221').html();
               for ( var i=0,len=list.length; i < len; i++) {
                 var item = list[i];
                 _html += renderTpl(tpl, item);
               }
-              $('.ranger-box thead').html(renderTpl(headertpl, res.catalogues));
+              // $('.ranger-box thead').html(renderTpl(headertpl, res.catalogues));
             } else {
               _html = $('#ranger_nodata_tpl').html();
               $('.ranger-box thead').html('');
