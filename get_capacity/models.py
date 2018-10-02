@@ -20,7 +20,7 @@ class CapacityDataManager(models.Manager):
                 avail=data[3],
                 use=data[4],
                 mounted=data[5],
-                create=datetime.now()
+                createtime=datetime.now()
             )
             result = {'result': True, 'message': u'保存成功'}
         except Exception, e:
