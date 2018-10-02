@@ -55,7 +55,7 @@ def get_ip_by_appid(request):
     return render_json(result)
 
 
-@login_exempt
+# @login_exempt
 def get_task_id_by_appid(request):
     '''
     获取业务下的作业列表
