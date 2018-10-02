@@ -296,36 +296,20 @@
         });
     </script>
     <script>
-      // function search(obj) {
-      //   var app_id = $('#app_id').val();
-      //   var ip = $('#ip').val();
-      //   var taskid = $('#task').val();
-      //   $('${SITE_URL}get_capacity/execute_task/', {'app_id': app_id, 'ip': ip, 'taskid': taskid}, function(data) {
-      //     console.log(data);
-      //     if (data.result) {
-      //       var task_instance_id = data.data;
-      //       get_capacity(task_instance_id, app_id);
-      //     } else {
-      //       alert('获取失败');
-      //     }
-      //   }, 'json');
-      // };
-
-      function search(obj){
-          var app_id = $('#app_id').val();
-          var ip = $('#ip').val();
-          var task_id = $('#task').val();
-          $.post('${SITE_URL}get_capacity/execute_task/', {'app_id': app_id, 'ip': ip, 'task_id': task_id}, function(data){
-                  console.log(data)
-                  if(data.result){
-                      var task_instance_id = data.data;
-                      // 异步请求后台数据
-                      get_capacity(task_instance_id, app_id);
-                  }else{
-                      alert("获取失败")
-                  }
-              }, 'json');
-      }
+      function search(obj) {
+        var app_id = $('#app_id').val();
+        var ip = $('#ip').val();
+        var taskid = $('#task').val();
+        $('${SITE_URL}get_capacity/execute_task/', {'app_id': app_id, 'ip': ip, 'taskid': taskid}, function(data) {
+          console.log(data);
+          if (data.result) {
+            var task_instance_id = data.data;
+            get_capacity(task_instance_id, app_id);
+          } else {
+            alert('获取失败');
+          }
+        }, 'json');
+      };
 
       function get_capacity(task_instance_id, app_id) {
         $.ajax({
@@ -334,7 +318,7 @@
           data: {'app_id': app_id, 'task_instance_id': task_instance_id},
           dataType: 'json',
           success: function(res) {
-            varhtml = '';
+            var html = '';
             var list = res.data;
             console.log(list);
             if (list.length) {
