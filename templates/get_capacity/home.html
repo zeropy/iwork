@@ -169,8 +169,9 @@
                                         <!-- <button type="button"><i class="fa fa-cog"></i></button> -->
                                     </li>
                                 </ul>
-                                <h3 class="king-block-title">历史数据趋势图</h3>
+                                <h3 class="king-block-title">磁盘容量趋势图</h3>
                             </div>
+                            <button type="button" class="king-btn mr10 king-success" onclick="refresh_chart(this)">刷新图表</button>
                             <div class="king-block-content">
                                 <div style="height: 300px; -webkit-tap-highlight-color: transparent; user-select: none; background-color: rgba(0, 0, 0, 0);" id="chart_1538054629863" class="king-chart-box chart-area " _echarts_instance_="1538141773088"></div>
                             </div>
@@ -411,6 +412,14 @@
                 containerId: 'chart_1538054629863'
             });
         });
+
+        function refresh_chart(obj) {
+          initEStandLineChart({
+              url: '${SITE_URL}get_capacity/chartdata/',
+              dataType: 'json',
+              containerId: 'chart_1538054629863'
+          });
+        }
     </script>
 </body>
 
