@@ -277,13 +277,13 @@
 
         function select_task(app_id) {
           // 级联选择task
-          $('#ip').html();
+          $('#task').html('');
           $.get('${SITE_URL}get_capacity/get_task_list/', {'app_id': app_id}, function(data) {
             if (data.result) {
               console.log('select_task');
               var _html = '';
               var list = data.data;
-              var tpl = $('task_tpl').html();
+              var tpl = $('#task_tpl').html();
               console.log(tpl);
               for (i=0,len=list.length; i < len; i++) {
                 var item = list[i];
