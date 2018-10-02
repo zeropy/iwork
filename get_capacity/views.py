@@ -85,7 +85,7 @@ def execute_task(request):
     '''
     app_id = request.POST.get('app_id')
     ip = request.POST.get('ip')
-    taskid = request.POST.get('task_id')
+    taskid = request.POST.get('taskid')
     script_param = request.POST.get('scriptparam')
     client = get_client_by_request(request)
 
