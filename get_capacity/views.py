@@ -180,7 +180,7 @@ def get_capacity_chartdata(request):
             'result': True,
             'messge': 'success',
             'data': {
-                'xAixs': times,
+                'xAxis': times,
                 'series': [
                     {
                         'name': '192.168.122.100 mounted on /',
