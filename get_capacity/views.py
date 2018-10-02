@@ -78,6 +78,7 @@ def get_task_id_by_appid(request):
     return render_json(result)
 
 
+@csrf_exempt
 def execute_task(request):
     '''
     执行容量查询作业
