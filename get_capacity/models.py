@@ -12,7 +12,7 @@ class CapacityDataManager(models.Manager):
     '''
     def save_data(self, data):
         try:
-            CapacityData.object.create(
+            CapacityData.objects.create(
                 ip=data[6],
                 filesystem=data[0],
                 size=data[1],

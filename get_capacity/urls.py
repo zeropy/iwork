@@ -11,4 +11,7 @@ urlpatterns = patterns('get_capacity.views',
     # 执行作业，获取磁盘容量
     (r'^execute_task/$', 'execute_task'),
     (r'^get_capacity/$', 'get_capacity'),
+
+    # 获取图表数据
+    (r'^chartdata/$', 'get_capacity_chartdata'),
 )

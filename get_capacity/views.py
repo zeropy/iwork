@@ -162,3 +162,32 @@ def get_capacity(request):
                 CapacityData.objects.save_data(_l_new)
 
         return render_json({'code': 0, 'message': 'success', 'data': capacity_data})
+
+
+def get_capacity_chartdata(request):
+    '''
+    获取视图数据,Mounted为:/、/data的容量
+    '''
+    capacitydatas = CapacityData.objects.filter(mounted='/', ip='192.168.122.100')
+    times = []
+    data_dir = []
+    for capacity in capacitydatas:
+        times.append(capacity.createtime.strftime('%Y-%m-%d %H:%M%S'))
+        data_dir.append(capacity.use.strip('%'))
+
+    result = {
+            'code': 0,
+            'result': True,
+            'message': 'success',
+            'data': {
+                'xAixs': times,
+                'series': [
+                    {
+                        'name': '192.168.122.100 mounted on /',
+                        'type': 'line',
+                        'data': data_dir
+                    }
+                ]
+            }
+        }
+    return render_json(result)
