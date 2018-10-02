@@ -311,33 +311,33 @@
         }, 'json');
       };
 
-      // function get_capacity(task_instance_id, app_id) {
-      //   $.ajax({
-      //     url: '${SITE_URL}get_capacity/get_capacity/',
-      //     type: 'GET',
-      //     data: {'app_id': app_id, 'task_instance_id': task_instance_id},
-      //     dataType: 'json',
-      //     success: function(res) {
-      //       var html = '';
-      //       var list = res.data;
-      //       console.log(list);
-      //       if (list.length) {
-      //         var tpl = $('#tpl_1538054587221').html();
-      //         var headertpl = $('#hreadertpl_1111').html();
-      //         for ( var i=0,len=list.length; i < len; i++) {
-      //           var item = list[i];
-      //           _html += renderTpl(tpl, item);
-      //         }
-      //         $('.ranger-box thead').html(renderTpl(headertpl, res.catalogues));
-      //       } else {
-      //         _html = $('#ranger_nodata_tpl').html();
-      //         $('.ranger-box thead').html('');
-      //         setTimeout(function() {get_capacity(task_instance_id, app_id)}, 1* 1000);
-      //       }
-      //       $('.ranger-box tbody').html(_html);
-      //     };
-      //   })
-      // }
+      function get_capacity(task_instance_id, app_id) {
+        $.ajax({
+          url: '${SITE_URL}get_capacity/get_capacity/',
+          type: 'GET',
+          data: {'app_id': app_id, 'task_instance_id': task_instance_id},
+          dataType: 'json',
+          success: function(res) {
+            var html = '';
+            var list = res.data;
+            console.log(list);
+            if (list.length) {
+              var tpl = $('#tpl_1538054587221').html();
+              var headertpl = $('#hreadertpl_1111').html();
+              for ( var i=0,len=list.length; i < len; i++) {
+                var item = list[i];
+                _html += renderTpl(tpl, item);
+              }
+              $('.ranger-box thead').html(renderTpl(headertpl, res.catalogues));
+            } else {
+              _html = $('#ranger_nodata_tpl').html();
+              $('.ranger-box thead').html('');
+              setTimeout(function() {get_capacity(task_instance_id, app_id)}, 1* 1000);
+            }
+            $('.ranger-box tbody').html(_html);
+          }
+        })
+      }
     </script>
     <script>
         function createEStandLineChart(conf){
