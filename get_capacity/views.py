@@ -108,20 +108,20 @@ def execute_task(request):
                 'scriptParam': script_param,
             })
 
-        # 执行作业
-        kwargs = {
-            'app_id': app_id,
-            'task_id': taskid,
-            'steps': step_args,
-        }
-        print(kwargs)
-        resp = client.job.execute_task(**kwargs)
-        if resp.get('result'):
-            task_instance_id = resp.get('data').get('taskInstanceId')
-        else:
-            task_instance_id = -1
-        result = {'result': resp.get('result'), 'data': task_instance_id}
-        return render_json(result)
+    # 执行作业
+    kwargs = {
+        'app_id': app_id,
+        'task_id': taskid,
+        'steps': step_args,
+    }
+    print(kwargs)
+    resp = client.job.execute_task(**kwargs)
+    if resp.get('result'):
+        task_instance_id = resp.get('data').get('taskInstanceId')
+    else:
+        task_instance_id = -1
+    result = {'result': resp.get('result'), 'data': task_instance_id}
+    return render_json(result)
 
 
 def _get_capacity(request):
