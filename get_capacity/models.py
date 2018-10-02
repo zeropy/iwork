@@ -1,6 +1,7 @@
 # coding: utf-8
 from django.db import models
 from datetime import datetime
+from common.log import logger
 
 # Create your models here.
 

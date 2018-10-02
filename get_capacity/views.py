@@ -102,7 +102,7 @@ def execute_task(request):
         steps = data.get('nmStepBeanList', [])
         # 组装步骤参数
         for _step in steps:
-            step_args.append({
+            steps_args.append({
                 'stepId': _step.get('stepId'),
                 'ipList': '1:%s' % ip,
                 'scriptParam': script_param,
