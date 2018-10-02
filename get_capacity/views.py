@@ -178,7 +178,7 @@ def get_capacity_chartdata(request):
     result = {
             'code': 0,
             'result': True,
-            'message': 'success',
+            'messge': 'success',
             'data': {
                 'xAixs': times,
                 'series': [
