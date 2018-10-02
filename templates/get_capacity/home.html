@@ -293,7 +293,7 @@
             select_ip(app_id);
             select_task(app_id);
           });
-        })
+        });
     </script>
     <script>
       function search(obj) {
@@ -304,9 +304,9 @@
           console.log(data);
           if (data.result) {
             var task_instance_id = data.data;
-            get_capacity(task_instance_id, app_id)
+            get_capacity(task_instance_id, app_id);
           } else {
-            alert('获取失败')
+            alert('获取失败');
           }
         }, 'json');
       };
@@ -325,17 +325,17 @@
               var tpl = $('#tpl_1538054587221').html();
               var headertpl = $('#hreadertpl_1111').html();
               for (i=0,len=list.length; i < len; i++) {
-                var item = list(i);
+                var item = list[i];
                 _html += renderTpl(tpl, item);
               }
-              $('.ranger-box thead').html(renderTpl(headertpl, res.catalogues))
+              $('.ranger-box thead').html(renderTpl(headertpl, res.catalogues));
             } else {
               _html = $('#ranger_nodata_tpl').html();
               $('.ranger-box thead').html('');
-              setTimeout(function() {get_capacity(task_instance_id, app_id}, 1*10)
+              setTimeout(function() {get_capacity(task_instance_id, app_id)}, 1* 1000);
             }
             $('.ranger-box tbody').html(_html);
-          }
+          };
         })
       }
     </script>
