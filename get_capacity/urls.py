@@ -9,4 +9,6 @@ urlpatterns = patterns('get_capacity.views',
     (r'^get_task_list/$', 'get_task_id_by_appid'),
 
     # 执行作业，获取磁盘容量
+    (r'^execute_task/$', 'execute_task'),
+    (r'^get_capacity/$', 'get_capacity'),
 )

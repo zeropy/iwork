@@ -169,10 +169,11 @@
                                 <template id="tpl_1538054587221">
                                     <tr>
                                         <td style="width: 100px;">#index#</td>
-                                        <td style="width: 20%;">#columnName1#</td>
-                                        <td style="width: 20%;">#columnName2#</td>
-                                        <td style="width: 20%;">#columnName3#</td>
-                                        <td>#columnName4#</td>
+                                        <td style="width: 20%;">#FileSystem#</td>
+                                        <td style="width: 20%;">#Size#</td>
+                                        <td style="width: 20%;">#Used#</td>
+                                        <td style="width: 20%;">#Use%#</td>
+                                        <td style="width: 20%;">#Mounted#</td>
                                     </tr>
                                 </template>
 
@@ -296,21 +297,6 @@
           }, 'json')
         };
 
-        function search(obj) {
-          var app_id = $('#app_id').val();
-          var ip = $('#ip').val();
-          var taskid = $('#task').val();
-          $('${SITE_URL}get_capacity/execute_task/', {'app_id': app_id, 'ip': ip, 'taskid': taskid}, function(data) {
-            console.log(data);
-            if (data.result) {
-              var task_instance_id = data.data;
-              get_capacity(task_instance_id, app_id)
-            } else {
-              alert('获取失败')
-            }
-          }, 'json')
-        };
-
         $(function(){
           $.get('${SITE_URL}get_capacity/get_app/', function(data) {
             if (data.result) {
@@ -343,6 +329,50 @@
             select_task(app_id);
           });
         })
+    </script>
+    <script>
+      function search(obj) {
+        var app_id = $('#app_id').val();
+        var ip = $('#ip').val();
+        var taskid = $('#task').val();
+        $('${SITE_URL}get_capacity/execute_task/', {'app_id': app_id, 'ip': ip, 'taskid': taskid}, function(data) {
+          console.log(data);
+          if (data.result) {
+            var task_instance_id = data.data;
+            get_capacity(task_instance_id, app_id)
+          } else {
+            alert('获取失败')
+          }
+        }, 'json')
+      };
+
+      function get_capacity(task_instance_id, app_id) {
+        $.ajax({
+          url: '${SITE_URL}get_capacity/get_capacity/',
+          type: 'GET',
+          data: {'app_id': app_id, 'task_instance_id': task_instance_id},
+          dataType: 'json',
+          success: function(res) {
+            varhtml = '';
+            var list = res.data;
+            console.log(list);
+            if (list.length) {
+              var tpl = $('#tpl_1538054587221').html();
+              var headertpl = $('#hreadertpl_1111').html();
+              for (i=0,len=list.length; i < len; i++) {
+                var item = list(i);
+                _html += renderTpl(tpl, item);
+              }
+              $('.ranger-box thead').html(renderTpl(headertpl, res.catalogues))
+            } else {
+              _html = $('#ranger_nodata_tpl').html();
+              $('.ranger-box thead').html('');
+              setTimeout(function() {get_capacity(task_instance_id, app_id}, 1*10)
+            }
+            $('.ranger-box tbody').html(_html);
+          }
+        })
+      }
     </script>
     <script>
         function createEStandLineChart(conf){
