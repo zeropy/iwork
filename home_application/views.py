@@ -10,12 +10,16 @@ See the License for the specific language governing permissions and limitations 
 """
 
 from common.mymako import render_mako_context
+from celery_tasks import async_task
+from account.decorators import login_exempt
 
 
+@login_exempt
 def home(request):
     """
     首页
     """
+    async_task.delay(1,2)
     return render_mako_context(request, '/home_application/home.html')
 
 

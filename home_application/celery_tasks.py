@@ -18,6 +18,7 @@ import datetime
 from celery import task
 from celery.schedules import crontab
 from celery.task import periodic_task
+import time
 
 from common.log import logger
 
@@ -27,6 +28,7 @@ def async_task(x, y):
     """
     定义一个 celery 异步任务
     """
+    time.sleep(10)
     logger.error(u"celery 定时任务执行成功，执行结果：{:0>2}:{:0>2}".format(x, y))
     return x + y
 
@@ -34,7 +36,6 @@ def async_task(x, y):
 def execute_task():
     """
     执行 celery 异步任务
-
     调用celery任务方法:
         task.delay(arg1, arg2, kwarg1='x', kwarg2='y')
         task.apply_async(args=[arg1, arg2], kwargs={'kwarg1': 'x', 'kwarg2': 'y'})

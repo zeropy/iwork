@@ -5,12 +5,14 @@ from account.decorators import login_exempt
 from django.views.decorators.csrf import csrf_exempt
 from blueking.component.shortcuts import get_client_by_request
 from get_capacity.models import CapacityData
+from get_capacity.celery_tasks import async_task
 
 # Create your views here.
 
 
 # @login_exempt
 def home(request):
+    async_task.delay(request.user.username)
     return render_mako_context(request, 'get_capacity/home.html')
 
 

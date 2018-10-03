@@ -36,7 +36,7 @@ APP_TOKEN = '52f39780-c613-4b97-be55-75f9f9a49bac'
 BK_PAAS_HOST = 'http://paas.blueking.com'
 
 # 是否启用celery任务
-IS_USE_CELERY = False
+IS_USE_CELERY = True
 # 本地开发的 celery 的消息队列（RabbitMQ）信息
 BROKER_URL_DEV = 'amqp://guest:guest@127.0.0.1:5672/'
 # TOCHANGE 调用celery任务的文件路径, List of modules to import when celery starts.
