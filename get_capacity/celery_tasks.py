@@ -1,3 +1,4 @@
+# coding: utf-8
 from celery import task
 from celery.schedules import crontab
 from celery.task import periodic_task
