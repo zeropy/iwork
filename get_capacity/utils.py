@@ -16,7 +16,7 @@ def execute_job_task(client, app_id, task_id):
     if resp.get('result'):
         data = resp.get('data')
         steps = data.get('nmStepBeanList', [])
-        for step in steps:
+        for _step in steps:
             steps_args.append({
                 'stepId': _step.get('stepId'),
                 'ipList': '1:%s' % ip,
