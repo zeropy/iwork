@@ -19,7 +19,7 @@ def execute_job_task(client, app_id, task_id):
         for _step in steps:
             steps_args.append({
                 'stepId': _step.get('stepId'),
-                'ipList': '1:%s' % ip,
+                'ipList': '1:192.168.122.100',
                 'scriptParam': script_param,
             })
 
