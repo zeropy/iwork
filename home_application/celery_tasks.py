@@ -94,19 +94,19 @@ def custom_func2(func_info, **kwargs):
 
 @task
 def custom_func3(func_info, **kwargs):
-    logger.error('func3 is runing')
+    # logger.error('func3 is runing')
     param3 = kwargs.get('param3', '')
-    message = u"自定义函数3参数: %s" % param1
-    logger.error('func3 log')
+    message = u"自定义函数3参数: %s" % param3
+    # logger.error('func3 log')
     taskid = datetime.datetime.now()
     ret_msg = {
         'param': param3,
         'message': message,
         'prew_step_result': func_info
     }
-    logger.error('func3 log1')
+    # logger.error('func3 log1')
     time.sleep(2)
-    logger.error('func3 log2')
+    # logger.error('func3 log2')
     logger.error("custom_func3 result: %s" % ret_msg)
     return {'ret_msg': ret_msg}
 
