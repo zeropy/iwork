@@ -14,7 +14,7 @@ def execute_job_task(client, app_id, task_id):
     steps_args = []
     script_param = ''
     if resp.get('result'):
-        data = resp.get('result')
+        data = resp.get('data')
         steps = data.get('nmStepBeanList', [])
         for step in steps:
             steps_args.append({
