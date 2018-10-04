@@ -33,3 +33,13 @@ def save_task_log(username='admin'):
         # logger.error(u"is_finish 值为%s " % is_finish)
         if is_finish:
             break
+
+
+@periodic_task(run_every=crontab(minute='*/1'))
+def get_capacity():
+    '''
+    周期性任务，每分钟执行一次
+    '''
+
+    save_task_log('admin')
+    logger.error(u"get capacity celery周期性任务执行成功")
