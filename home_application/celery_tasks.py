@@ -94,6 +94,7 @@ def custom_func2(func_info, **kwargs):
 
 @task
 def custom_func3(func_info, **kwargs):
+    logger.error('func3 is runing')
     param3 = kwargs.get('param3', '')
     message = u"自定义函数3参数: %s" % param1
     taskid = datetime.datetime.now()
