@@ -47,6 +47,7 @@ def get_task_capacity(client, task_instance_id):
     capacity_data = []
     if resp.get('result'):
         data = resp.get('data')
+        logger.error(data)
         logs = ''
         ip = ''
         for _d in data:
