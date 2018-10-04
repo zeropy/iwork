@@ -9,9 +9,10 @@ an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express o
 See the License for the specific language governing permissions and limitations under the License.
 """
 
-from common.mymako import render_mako_context
-from celery_tasks import async_task
+from common.mymako import render_mako_context, render_json
+from celery_tasks import async_task,chain_task
 from account.decorators import login_exempt
+from common.log import logger
 
 
 @login_exempt
@@ -35,3 +36,17 @@ def contactus(request):
     联系我们
     """
     return render_mako_context(request, '/home_application/contact.html')
+
+
+# @login_exempt
+def chain(request):
+    '''
+    执行串行任务
+    '''
+    logger.error("开始的执行串行任务")
+    func1_param = {'param1': 'func1 param'}
+    func2_param = {'param2': 'func2 param'}
+    func3_param = {'param3': 'func3 param'}
+
+    chain_task.delay(func1_param, func2_param, func3_param)
+    return render_json({'result': True, 'message': 'success'})

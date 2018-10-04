@@ -15,7 +15,7 @@ celery 任务示例
 """
 import datetime
 
-from celery import task
+from celery import task, chain
 from celery.schedules import crontab
 from celery.task import periodic_task
 import time
@@ -60,3 +60,61 @@ def get_time():
     execute_task()
     now = datetime.datetime.now()
     logger.error(u"celery 周期任务调用成功，当前时间：{}".format(now))
+
+
+@task
+def custom_func1(**kwargs):
+    param1 = kwargs.get('param1', '')
+    message = u"自定义函数1参数: %s" % param1
+    taskid = datetime.datetime.now()
+    ret_msg = {
+        'param': param1,
+        'message': message,
+        'taskid': taskid
+    }
+    time.sleep(2)
+    logger.error("custom_func1 result: %s" % ret_msg)
+    return {'ret_msg': ret_msg}
+
+
+@task
+def custom_func2(func_info, **kwargs):
+    param2 = kwargs.get('param2', '')
+    message = u"自定义函数2参数: %s" % param2
+    taskid = datetime.datetime.now()
+    ret_msg = {
+        'param': param2,
+        'message': message,
+        'prew_step_result': func_info
+    }
+    time.sleep(2)
+    logger.error("custom_func2 result: %s" % ret_msg)
+    return {'ret_msg': ret_msg}
+
+
+@task
+def custom_func3(func_info, **kwargs):
+    param3 = kwargs.get('param3', '')
+    message = u"自定义函数3参数: %s" % param1
+    taskid = datetime.datetime.now()
+    ret_msg = {
+        'param': param3,
+        'message': message,
+        'prew_step_result': func_info
+    }
+    time.sleep(2)
+    logger.error("custom_func3 result: %s" % ret_msg)
+    return {'ret_msg': ret_msg}
+
+
+@task
+def chain_task(func1_param, func2_param, func3_param):
+    '''
+    串行任务
+    '''
+    logger.error("chain task: %s %s %s" % (func1_param, func2_param, func3_param))
+    chain(
+        custom_func1.s(**func1_param),
+        custom_func2.s(**func2_param),
+        custom_func3.s(**func3_param),
+    ).delay()
