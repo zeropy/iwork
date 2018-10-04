@@ -174,7 +174,7 @@ def get_capacity_chartdata(request):
     times = []
     data_dir = []
     for capacity in capacitydatas:
-        times.append(capacity.createtime.strftime('%Y-%m-%d %H:%M%S'))
+        times.append(capacity.createtime.strftime('%Y-%m-%d %H:%M:%S'))
         data_dir.append(capacity.use.strip('%'))
 
     result = {
