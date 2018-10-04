@@ -69,4 +69,4 @@ def get_task_capacity(client, task_instance_id):
                 })
                 _l_new.append(ip)
                 CapacityData.objects.save_data(_l_new)
-    return 1
+    return resp.get('result')
