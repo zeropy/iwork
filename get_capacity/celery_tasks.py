@@ -30,5 +30,6 @@ def save_task_log(username='admin'):
     task_instance_id = execute_job_task(client, 2, 2)
     while True:
         is_finish = get_task_capacity(client, task_instance_id)
+        logger.error(u"is_finish 值为%s " % is_finish)
         if is_finish:
             break
